@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<title>{% block title %}{% endblock %}</title>
+{% block header %}{% endblock %}
+{%- if message -%}
+<h6>{{ message }}</h6>
+{%- endif -%}
+{%- block content -%}{%- endblock -%}
+{%- block footer -%}{%- endblock -%}

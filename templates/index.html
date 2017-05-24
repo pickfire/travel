@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Index{% endblock %}
+{% block content %}
+{% if user -%}
+<p>Hello {{user.name}}</p>
+<ol>
+  {%- for tour in tours %}
+  <li><a href="/{{ tour.id }}" class="{{ tour.state }}">
+    {{ tour.name|e }}{% if tour.state|string == 'state.draft' %} [draft]{% endif %}</li>
+  </a></li>
+  {%- endfor -%}
+</ol>
+<a href='/add'>Add tour</a>
+{% else %}
+<a href="/login">Login</a>
+<ul>
+  <li>Employee</li>
+    <ul>
+      <li>username: name</li>
+      <li>password: pass</li>
+    </ul>
+  <li>Manager</li>
+    <ul>
+      <li>username: mann</li>
+      <li>password: pass</li>
+    </ul>
+</ul>
+{% endif %}
+{% endblock %}

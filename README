@@ -1,0 +1,14 @@
+Travel Portal
+=============
+
+Experiment in building a simple travel portal in Sanic.
+Demo: http://tp.pickfire.tk/ (python >= 3.6.0 required)
+
+Usage
+-----
+
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+
+After the prerequisites are installed, run `python app.py`.

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Tour {{ tour.id if tour else 'New' }}{% endblock %}
+{% block content %}
+<h6>{{ tour.state|string }}</h6>
+<form method="post">
+  <label>Tour name: <input required name="name" type="text" value="{{ tour.name|e }}"></label><br>
+  <label>Tour desc: <input name="desc" type="text" value="{{ tour.desc|e }}"></label><br>
+  <label>Start time: <input type="date" value="{{ tour.start }}"></label><br>
+  <label>End time: <input type="date" value="{{ tour.end }}"></label><br>
+  <label>Ticket cost: <input name="ticket_cost" type="number" value="{{ tour.ticket_cost }}"></label><br>
+  <label>Cab to home cost: <input name="cab_home_cost" type="number" value="{{ tour.cab_home_cost }}"></label><br>
+  <label>Cab to dest cost: <input name="cab_dest_cost" type="number" value="{{ tour.cab_dest_cost }}"></label><br>
+  <label>Hotel cost: <input name="hotel_cost" type="number" value="{{ tour.hotel_cost }}"></label><br>
+  <label>Local conveyance: <input name="local_canveyance" type="text" value="{{ tour.local_conveyance }}"></label><br>
+  {% if tour.state|string == 'state.draft' or not tour %}
+  <label>Review by</label>
+  <select name="manager">
+    {%- for manager in managers %}
+    <option{% if manager == the_man %} selected{% endif %}>{{ manager }}</option>
+    {%- endfor -%}
+  </select><br>
+  <input name="state" type="submit" value="save">
+  <input name="state" type="submit" value="submit">
+  {% elif user.role|string == 'role.manager' %}
+  <input name="state" type="submit" value="approved">
+  <input name="state" type="submit" value="rejected">
+  <button name="state" type="submit" value="request">more info needed</button>
+  {% else %}
+  <label>Reviewing by {{ the_man }}</label>
+  {% endif %}
+</form>
+<a href="/">Back</a>
+{% endblock %}
